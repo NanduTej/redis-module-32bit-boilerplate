@@ -27,9 +27,13 @@ $(DOCKCROSS): $(BUILD_PATH)
 	docker run --rm dockcross/linux-x86 > $(DOCKCROSS)
 	chmod +x $(DOCKCROSS)
 
-include/redismodule.h:
-	# note that this won't be removed by make clean
+include/redismodule.h: include/redismodule_$(REDIS_VERSION).h
+
+include/redismodule_$(REDIS_VERSION).h:
+	# download redismodule.h correspoding to $(REDIS_VERSION)
+	# and link it to include/redismodule.h
 	wget -O"$@" $(REDIS_MODULE_H_REMOTE)
+	ln -rsf "$@" include/redismodule.h
 
 ## OTHER TARGETS
 $(BUILD_PATH):
