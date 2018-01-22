@@ -32,6 +32,7 @@ include/redismodule.h: include/redismodule_$(REDIS_VERSION).h
 include/redismodule_$(REDIS_VERSION).h:
 	# download redismodule.h correspoding to $(REDIS_VERSION)
 	# and link it to include/redismodule.h
+	mkdir -p include
 	wget -O"$@" $(REDIS_MODULE_H_REMOTE)
 	ln -rsf "$@" include/redismodule.h
 
